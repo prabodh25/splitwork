@@ -1,0 +1,7 @@
+{
+  "name": "splitwork",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
