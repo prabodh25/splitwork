@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataInteractionService } from '../services/data-interaction.service';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class HomePage implements OnInit {
 
   groups:any;
+  pendingCount: number;
+  evalutingCount: number;
+  completeCount: number;
 
-  constructor() { 
-    this.groups = [
-      {name:"Group 1"},
-      {name:"Group 2"},
-      {name:"Group 3"},
-      {name:"Group 4"},
-      {name:"Group 5"},
-      {name:"Group 6"}
-    ];
+  constructor(private dataService: DataInteractionService) { 
+    this.pendingCount = 30;
+    this.evalutingCount = 20;
+    this.completeCount = 10
+    this.groups = dataService.getGroups();
   }
 
   ngOnInit() {

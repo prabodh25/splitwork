@@ -2,28 +2,46 @@
   <ion-toolbar>
     <ion-title>Home</ion-title>
   </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <ion-button fill="outline" color="danger" size="small" shape="round">
+          <ion-label color="danger">Pending {{pendingCount}}</ion-label>
+          <!-- <ion-badge slot="end" color="danger">2</ion-badge> -->
+        </ion-button>
+      </ion-col>
+      <ion-col col-4>
+        <ion-button fill="outline" color="primary" size="small" shape="round">
+          <ion-label color="primary">Evaluating {{evalutingCount}}</ion-label>
+          <!-- <ion-badge color="primary">5</ion-badge> -->
+        </ion-button>
+      </ion-col>
+      <ion-col col-4>
+        <ion-button fill="outline" color="success" size="small" shape="round">
+          <ion-label color="success">Done {{completeCount}}</ion-label>
+          <!-- <ion-badge color="success">10</ion-badge> -->
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
 </ion-header>
 
 <ion-content>
-  <ion-chip>
-    <ion-label color="danger">Pending</ion-label>
-    <ion-badge color="danger">2</ion-badge>
-  </ion-chip>
-  <ion-chip>
-    <ion-label color="primary">Evaluation</ion-label>
-    <ion-badge color="primary">5</ion-badge>
-  </ion-chip>
-  <ion-chip>
-    <ion-label color="success">Complete</ion-label>
-    <ion-badge color="success">10</ion-badge>
-  </ion-chip>
-  <ion-list>
+  <ion-searchbar placeholder="Search"></ion-searchbar>
+  <ion-list style="padding-top: 30px;">
     <ion-item-sliding *ngFor="let group of groups">
       <ion-item>
         <ion-avatar slot="start">
           <img src="http://placehold.it/60?text=B">
         </ion-avatar>
-        <ion-label>{{group.name}}</ion-label>
+        <ion-label >
+          <h2>{{group.name}}</h2>
+          <p>{{group.latestUpdate}}</p>
+        </ion-label>
+        <ion-badge slot="end" *ngIf="group.unreadCount > 0">
+          {{group.unreadCount}}
+        </ion-badge>
       </ion-item>
 
       <ion-item-options>

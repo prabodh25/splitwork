@@ -1,9 +1,68 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>newTask</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button  (click)="dismiss()">Close</ion-button>
+
+    </ion-buttons>
+    <ion-title>Create New Task</ion-title>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list style="padding: 2%;">
+    <form [formGroup]="taskForm">
+      <ion-item>
+        <ion-label color="primary" position="floating">Group</ion-label>
+        <ion-input type="text" formControlName="groupName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Task Name</ion-label>
+        <ion-input type="text" formControlName="taskName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Task Details</ion-label>
+        <ion-textarea rows="3" type="text" formControlName="taskDetails"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Start</ion-label>
+        <ion-datetime formControlName="startDate" displayFormat="D MMM YYYY H:mm" min="1997" max="2099" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Due</ion-label>
+        <ion-datetime formControlName="dueDate" displayFormat="D MMM YYYY H:mm" min="1997" max="2099" ></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Assignee</ion-label>
+        <ion-input type="text" formControlName="assignee"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Evaluator</ion-label>
+        <ion-input type="text" formControlName="evaluator"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" position="floating">Creator</ion-label>
+        <ion-input type="text" formControlName="creator"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary" >Alert</ion-label>
+        <ion-checkbox slot="end" formControlName="isAlertNeeded"></ion-checkbox>
+      </ion-item>
+      
+    </form>
+  </ion-list>
 
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button slot="end" color="secondary" size="small" (click)="dismiss()">
+      <ion-icon slot="start" name="arrow-undo-circle"></ion-icon>
+      Cancel</ion-button>
+    <ion-button slot="end" color="primary" size="small" (click)="onSaveClick()">
+      <ion-icon slot="start" name="save"></ion-icon>
+      Save</ion-button>
+  </ion-toolbar>
+</ion-footer>
