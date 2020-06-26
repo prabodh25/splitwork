@@ -17,7 +17,11 @@
     <form [formGroup]="taskForm">
       <ion-item>
         <ion-label color="primary" position="floating">Group</ion-label>
-        <ion-input type="text" formControlName="groupName"></ion-input>
+        <ion-select formControlName="groupName">
+          <ion-select-option *ngFor="let group of groups" [value]="type">
+            {{group.name}}
+          </ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label color="primary" position="floating">Task Name</ion-label>
@@ -37,11 +41,19 @@
       </ion-item>
       <ion-item>
         <ion-label color="primary" position="floating">Assignee</ion-label>
-        <ion-input type="text" formControlName="assignee"></ion-input>
+        <ion-select formControlName="assignees" multiple="true">
+          <ion-select-option *ngFor="let user of users" [value]="type">
+            {{user.firstName}} {{user.lastName}}
+          </ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label color="primary" position="floating">Evaluator</ion-label>
-        <ion-input type="text" formControlName="evaluator"></ion-input>
+        <ion-select formControlName="evaluator" >
+          <ion-select-option *ngFor="let user of users" [value]="type">
+            {{user.firstName}} {{user.lastName}}
+          </ion-select-option>
+        </ion-select>
       </ion-item>
       <ion-item>
         <ion-label color="primary" position="floating">Creator</ion-label>

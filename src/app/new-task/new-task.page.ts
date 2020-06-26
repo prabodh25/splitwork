@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { DataInteractionService } from '../services/data-interaction.service';
+import { group } from '../entities/group';
+import { user } from '../entities/user';
 
 @Component({
   selector: 'app-new-task',
@@ -9,12 +12,17 @@ import { ModalController } from '@ionic/angular';
 })
 export class NewTaskPage implements OnInit {
   public taskForm: FormGroup;
+  groups: group[]=[];
+  users: user[]=[];
 
-  constructor(private formBuilder:FormBuilder, private modalCtrl: ModalController) {
+  constructor(private formBuilder:FormBuilder, private modalCtrl: ModalController, private dbService:DataInteractionService) {
+    this.groups = this.dbService.getGroups();
+    this.users = this.dbService.getUsers();
+
     this.taskForm = this.formBuilder.group({
       groupId: new FormControl(0),
       taskId: new FormControl(0),
-      groupName: new FormControl('', Validators.compose([
+      groupName: new FormControl(this.groups[0], Validators.compose([
         Validators.required
       ])),
       taskName: new FormControl('', Validators.compose([
@@ -29,7 +37,7 @@ export class NewTaskPage implements OnInit {
       dueDate: new FormControl(new Date().toISOString(), Validators.compose([
         Validators.required
       ])),
-      assignee: new FormControl('', Validators.compose([
+      assignees: new FormControl(this.users[0], Validators.compose([
         Validators.required
       ])),
       evaluator: new FormControl('', Validators.compose([
